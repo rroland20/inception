@@ -1,0 +1,39 @@
+version: '3.3'
+services:
+  db:
+    image: mariadb
+    container_name: mariadb
+    ports:
+      - 3306:3306
+    volumes:
+      - ./requirements/mariadb:var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rroland
+      MYSQL_DATABASE: mariadb
+      MYSQL_USER: rroland
+      MYSQL_PASSWORD: rroland
+    restart: always
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    ports:
+      - 9000:9000
+    volumes:
+      - ./requirements/wordpress/wp-config.php:/var/www/html/wordpress
+      - ./requirements/wordpress/config.inc.php://var/www/html/phpmyadmin
+    environment:
+      MYSQL_HOST: db
+    restart: always
+    links:
+      - db
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./requirements/nginx/nginx.conf ./etc/nginx/sites-available
+    restart: always
+    links:
+      - wordpress
