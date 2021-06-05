@@ -1,5 +1,8 @@
 <?php
 
+// define( 'WP_CACHE_KEY_SALT', 'rroland.42.fr');
+// define('WP_CACHE', true);
+
 define( 'DB_NAME', 'wordpress' );
 
 /** MySQL database username */
@@ -9,7 +12,7 @@ define( 'DB_USER', 'rroland' );
 define( 'DB_PASSWORD', '' );
 
 /** MySQL hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', 'mariadb' );
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );

@@ -9,6 +9,10 @@ RUN rm -rf ./etc/nginx/sites-enabled/default
 COPY /nginx.conf ./etc/nginx/sites-available
 RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 
+# COPY style.css /var/www/html/
+# COPY index.html /var/www/html/
+# COPY background.jpeg /var/www/html/
+
 RUN	mkdir /etc/nginx/ssl
 RUN openssl req -x509 -nodes -days 365 -newkey \
 rsa:2048 -keyout /etc/nginx/ssl/rroland.key \
@@ -17,6 +21,6 @@ rsa:2048 -keyout /etc/nginx/ssl/rroland.key \
 
 RUN chmod -R 755 /etc/nginx/ssl/rroland*
 
-EXPOSE 80 443 9000
+EXPOSE 443
 CMD ["nginx", "-g", "daemon off;"]
 # ENTRYPOINT /bin/bash run.sh

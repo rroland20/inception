@@ -18,4 +18,4 @@ RUN rm -rf phpMyAdmin-5.0.4-all-languages.tar.gz
 COPY /config.inc.php /var/www/html/phpmyadmin
 RUN rm -rf /var/www/html/phpmyadmin/config.sample.inc.php
 
-EXPOSE 9000 3306
+EXPOSE 9000

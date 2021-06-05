@@ -3,14 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alena <alena@student.42.fr>                +#+  +:+       +#+         #
+#    By: rroland <rroland@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 17:28:45 by rroland           #+#    #+#              #
-#    Updated: 2021/05/31 23:34:30 by alena            ###   ########.fr        #
+#    Updated: 2021/06/03 14:31:35 by rroland          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 
 all:
-	cd srcs | sudo docker-compose up --build
+	docker-compose -f srcs/docker-compose.yaml up --build
+
+down:
+	docker-compose -f srcs/docker-compose.yaml down
