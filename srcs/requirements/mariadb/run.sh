@@ -16,9 +16,9 @@ echo "FLUSH PRIVILEGES;"| mysql -u root --skip-password
 echo "update mysql.user set plugin='' where user='root';"| mysql -u root --skip-password
 # service mysql stop
 # else
-mkdir -p /var/run/mysqld
-touch /var/run/mysqld/mysqld.pid
-mkfifo /var/run/mysqld/mysqld.sock
+# mkdir -p /var/run/mysqld
+# touch /var/run/mysqld/mysqld.pid
+# mkfifo /var/run/mysqld/mysqld.sock
 # fi
 # chmod 770 /var/lib/mysql
 # chmod 755 var/run/mysqld/mysqld.sock

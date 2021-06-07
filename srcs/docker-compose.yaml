@@ -1,31 +1,31 @@
 version: '3.3'
 
-volumes:
-  wp:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /Users/rroland/data/wp
-  db:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /Users/rroland/data/db
+# volumes:
+#   wp:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /Users/rroland/data/wp
+#   db:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /Users/rroland/data/db
 
-networks:
-  my-net:
-    driver: bridge
+# networks:
+#   my-net:
+#     driver: bridge
  
 services:
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
-    networks:
-       - my-net
-    volumes:
-      - db:/var/lib/mysql
+    # networks:
+    #    - my-net
+    # volumes:
+    #   - db:/var/lib/mysql
   #   environment:
   #     MYSQL_ROOT_PASSWORD: rroland
   #     MYSQL_DATABASE: mariadb
@@ -37,10 +37,10 @@ services:
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
-    networks:
-      - my-net
-    volumes:
-      - wp:/var/www/html/
+    # networks:
+    #   - my-net
+    # volumes:
+    #   - wp:/var/www/html/
   #     - ./requirements/wordpress/config.inc.php://var/www/html/phpmyadmin
   #   environment:
   #     MYSQL_HOST: mariadb
@@ -49,13 +49,13 @@ services:
       - mariadb
     tty: true
 
-  nginx:
+  nginx_1:
     build: ./requirements/nginx
-    container_name: nginx
+    container_name: nginx_2
     ports:
       - 443:443
-    networks:
-      - my-net
+    # networks:
+    #   - my-net
     restart: always
     depends_on:
       - wordpress

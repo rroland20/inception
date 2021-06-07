@@ -2,7 +2,7 @@ FROM debian:buster
 
 RUN apt-get -y update && apt-get -y upgrade && apt-get install -y apt-utils
 RUN apt-get -y install  vim \
-                        mariadb-server
+                        mariadb-server 
 
 # RUN mkdir /var/run/mysqld
 # RUN chown -R mysql /var/run/mysqld
@@ -13,4 +13,4 @@ COPY ./run.sh /var/www/
 EXPOSE 3306
 RUN chmod +x /var/www/run.sh
 # ENTRYPOINT ["/var/www/run.sh"]
-CMD ["/var/www/run.sh", "mysqld"]
+CMD ["/var/www/run.sh", "mysql"]
