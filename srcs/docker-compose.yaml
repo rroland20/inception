@@ -1,35 +1,33 @@
 version: '3.3'
 
-# volumes:
-#   wp:
-#     driver: local
-#     driver_opts:
-#       type: none
-#       o: bind
-#       device: /Users/rroland/data/wp
-#   db:
-#     driver: local
-#     driver_opts:
-#       type: none
-#       o: bind
-#       device: /Users/rroland/data/db
+volumes:
+  wp:
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: /Users/rroland/data/wp
+  db:
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: /Users/rroland/data/db
 
-# networks:
-#   my-net:
-#     driver: bridge
+networks:
+  my-net:
+    driver: bridge
  
 services:
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
-    # networks:
-    #    - my-net
-    # volumes:
-    #   - db:/var/lib/mysql
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: rroland
-  #     MYSQL_DATABASE: mariadb
-  #     MYSQL_USER: rroland
+    networks:
+       - my-net
+    volumes:
+      - db:/var/lib/mysql
+    env_file:
+      - .env
     restart: always
     tty:
       true
@@ -37,30 +35,26 @@ services:
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
-    # networks:
-    #   - my-net
-    # volumes:
-    #   - wp:/var/www/html/
-  #     - ./requirements/wordpress/config.inc.php://var/www/html/phpmyadmin
-  #   environment:
-  #     MYSQL_HOST: mariadb
-  #   restart: always
+    networks:
+      - my-net
+    volumes:
+      - wp:/var/www/html/
+    environment:
+      MYSQL_HOST: mariadb
+    restart: always
     depends_on:
       - mariadb
     tty: true
 
-  nginx_1:
+  nginx:
     build: ./requirements/nginx
-    container_name: nginx_2
+    container_name: nginx
     ports:
       - 443:443
-    # networks:
-    #   - my-net
+    networks:
+      - my-net
     restart: always
     depends_on:
       - wordpress
-      
-    # volumes:
-    #   - ./requirements/nginx/nginx.conf ./etc/nginx/sites-available
 
  

@@ -8,9 +8,9 @@ RUN apt-get -y install  vim \
 # RUN chown -R mysql /var/run/mysqld
 
 COPY ./my.cnf /etc/mysql/my.cnf
-
 COPY ./run.sh /var/www/
-EXPOSE 3306
 RUN chmod +x /var/www/run.sh
-# ENTRYPOINT ["/var/www/run.sh"]
+
+EXPOSE 3306
+
 CMD ["/var/www/run.sh", "mysql"]

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # set -e
 
 # sed -i "s/bind-ad/\#bind_ad/" "/etc/mysql/mariadb.conf.d/50-server.cnf"
@@ -24,3 +24,4 @@ echo "update mysql.user set plugin='' where user='root';"| mysql -u root --skip-
 # chmod 755 var/run/mysqld/mysqld.sock
 # chown -R mysql /var/run/mysqld
 exec "$@"
+
