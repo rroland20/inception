@@ -6,6 +6,7 @@ RUN apt-get -y install	wordpress \
 
 RUN mv usr/share/wordpress /var/www/html/wordpress
 COPY /wp-config.php /var/www/html/wordpress
+RUN mv /var/www/html/index.html /var/www/html/wordpress/
 RUN rm -rf /var/www/html/wordpress/wp-config-sample.php
 
 RUN sed -ie s1/run/php/php7.3-fpm.sock190001 /etc/php/7.3/fpm/pool.d/www.conf

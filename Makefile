@@ -3,22 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rroland <rroland@student.42.fr>            +#+  +:+       +#+         #
+#    By: alena <alena@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 17:28:45 by rroland           #+#    #+#              #
-#    Updated: 2021/06/08 20:25:03 by rroland          ###   ########.fr        #
+#    Updated: 2021/06/23 14:08:36 by alena            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 
 all:
-	docker-compose -f srcs/docker-compose.yaml up --build
+	sudo docker-compose -f srcs/docker-compose.yaml up
 
 down:
-	docker-compose -f srcs/docker-compose.yaml down
+	sudo docker-compose -f srcs/docker-compose.yaml down
+
+rm_vol:
+	sudo docker volume rm srcs_wp
+	sudo docker volume rm srcs_db	
 
 cache:
-	docker-compose -f srcs/docker-compose.yaml down --rmi all -v
-	docker-compose -f srcs/docker-compose.yaml build --no-cache
-	docker-compose -f srcs/docker-compose.yaml up
+	sudo docker-compose -f srcs/docker-compose.yaml down --rmi all -v
+	sudo docker-compose -f srcs/docker-compose.yaml build --no-cache
+	sudo docker-compose -f srcs/docker-compose.yaml up
+re:
+	sudo docker-compose -f srcs/docker-compose.yaml up --build

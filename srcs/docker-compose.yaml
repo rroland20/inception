@@ -2,17 +2,17 @@ version: '3.3'
 
 volumes:
   wp:
-    # driver: local
-    # driver_opts:
-    #   type: none
-    #   o: bind
-    #   device: /Users/rroland/data/wp
+    driver: local
+    driver_opts:
+      type: none
+      o: bind 
+      device: /home/alena/data/wp
   db:
-    # driver: local
-    # driver_opts:
-    #   type: none
-    #   o: bind
-    #   device: /Users/rroland/data/db
+    driver: local
+    driver_opts:
+      type: none
+      o: bind 
+      device: /home/alena/data/db
 
 networks:
   my-net:
@@ -39,8 +39,8 @@ services:
       - my-net
     volumes:
       - wp:/var/www/html/
-    environment:
-      MYSQL_HOST: mariadb
+    # environment:
+    #   MYSQL_HOST: mariadb
     restart: always
     depends_on:
       - mariadb
@@ -51,10 +51,10 @@ services:
     container_name: nginx
     ports:
       - 443:443
+    volumes:
+      - wp:/var/www/html/
     networks:
       - my-net
     restart: always
     depends_on:
       - wordpress
-
- 
