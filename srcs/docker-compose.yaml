@@ -39,8 +39,8 @@ services:
       - my-net
     volumes:
       - wp:/var/www/html/
-    # environment:
-    #   MYSQL_HOST: mariadb
+    env_file:
+      - .env
     restart: always
     depends_on:
       - mariadb
